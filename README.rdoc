@@ -1,0 +1,36 @@
+1 - Create Github API key here:
+
+https://github.com/settings/applications
+
+2 - After you've created a key for your app on Github,
+specify this callback:
+
+http://localhost:3000/auth/github/callback
+
+3 - Enter your Github API key and secret here:
+
+config/initializers/omniauth.rb
+
+4 - Run your migrations, and start your server
+
+5 - Go to localhost, and click on "Authenticate via Github"
+
+6 - Success!  You should see a list of 30 repos at /users/show
+
+
+-------------------------------------------------------
+
+TESTACULAR
+
+* npm -g testacular 
+
+* cd to spec/javascripts
+
+* execute: 'testacular start' (your tests will execute based on what you configure
+inside of spec/javascripts/testacular.conf.js)
+
+-------------------------------------------------------
+
+TESTING TERMINOLOGY
+
+* testacular is a "test runner", jasmine is a testing framework, phantomjs is a headless browser (webkit specifically)

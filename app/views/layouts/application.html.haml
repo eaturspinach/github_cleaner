@@ -1,0 +1,95 @@
+!!!
+%html{:lang => "en"}
+  %head
+    %title= full_title(yield(:title))
+    = stylesheet_link_tag    "application", :media => "all"
+    = csrf_meta_tags
+    
+    / show app in full-screen mode
+    %meta{:content => "yes", :name => "apple-mobile-web-app-capable"}
+    / viewport meta tag for responsive design
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0", user-scalable=0>
+    / remove Toolbars and make the Website iOS capable
+    %meta{:content => "yes", :name => "apple-mobile-web-app-capable"}
+    / change the App Status Bar colour
+    %meta{:content => "black", :name => "apple-mobile-web-app-status-bar-style"}/
+
+    = javascript_include_tag "vendor/modernizr"
+
+  %body
+    
+    = render :partial => "layouts/header"
+    
+    %script{:type => "text/x-handlebars", "data-template-name" => "application"}
+
+      - if session[:uid].present?
+        {{outlet}}
+      - else
+        = render :template => "sessions/new"
+
+    %script{:type => "text/x-handlebars", "id" => "repositories"}
+      
+      .row
+        .small-12.large-12.columns
+          %ul#repos
+            = hb "each repository in controller" do
+              %li.repo<
+                .row
+                  .small-9.large-11.columns
+                    =hb "view App.RepositoryView" do
+                      %div.repo-name
+                        {{repository.name}}
+                        %p.repo-description.hide
+                          {{repository.description}}
+
+                  .small-3.large-1.columns
+                    .checkbox
+                      %label.checkbox_label
+                        {{view App.RepositoryCheckbox valueBinding='repository.id'}}
+                
+                .repo-modal.reveal-modal.xlarge
+                  %a.close-reveal-modal &#215;
+                  .container.left
+                  .checkbox.right
+                    %label.checkbox_label
+                      {{view App.RepositoryCheckbox valueBinding='repository.id'}}
+
+
+      #bottom-nav
+        .row
+          .small-6.large-6.columns
+            #marked-for-deletion-count
+              {{isMarkedForDeletionCount}} repos marked for deletion
+          .small-6.large-6.columns
+            %a#clean-button.large.button.expand.success{:hb=>"action reviewModal target='view'"} Clean
+
+      #review-modal.reveal-modal.xlarge
+        %a.close-reveal-modal &#215;
+        #review-modal-container
+          %p You are about to delete the following {{isMarkedForDeletionCount}} repos:
+          %ol#repos-marked-for-deletion
+            =hb "each markedForDeletion" do
+              %li
+                {{name}}
+        .row
+          .small-12.large-6.columns
+            %a#cancel-button.large.button.expand.alert{:hb=>"action cancel target='view'"} Cancel
+          .small-12.large-6.columns
+            %a#confirm-button.large.button.expand.success{:hb=>"action submit target='view'"}  Yes, delete these repos!
+
+    #confirmation-modal.reveal-modal.xlarge
+      %a.close-reveal-modal &#215;
+      Congratulations!  You've deleted shit!
+
+    %script{:type => "text/x-handlebars", "id" => "repository"}
+      %h2 {{name}}}
+      %ul
+        %li {{url}}
+        %li {{description}}
+      %button Mark for deletion
+            
+  = javascript_include_tag "application"
+
+
+
+

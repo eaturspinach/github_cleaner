@@ -1,0 +1,15 @@
+development:
+  adapter: postgresql
+  encoding: unicode
+  database: github_mobile_dev
+  pool: 5
+  # username: postgres
+  # password: orangutan
+
+test:
+  adapter: postgresql
+  encoding: unicode
+  database: github_mobile_test
+  pool: 5
+  # username: postgres
+  # password: orangutan

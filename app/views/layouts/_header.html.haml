@@ -1,0 +1,19 @@
+%header
+  .row
+    .small-12.large-12.columns
+      %nav.top-bar
+        %ul.title-area
+          / Title Area
+          %li.name
+            %h1
+              %a{}Github Cleaner
+          / Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone
+          %li.toggle-topbar.menu-icon
+            %a{:href => root_path}
+              %span Menu
+        %section.top-bar-section
+          - if session[:uid].present?
+            / Right Nav Section
+            %ul.right
+              %li
+                = link_to "Sign Out", sign_out_path, :id => "sign_out"
