@@ -1,3 +1,7 @@
+DEMO => http://githubcleaner.com/
+
+-------------------------------------------------------
+
 1 - Create Github API key here:
 
 https://github.com/settings/applications
@@ -15,22 +19,4 @@ config/initializers/omniauth.rb
 
 5 - Go to localhost, and click on "Authenticate via Github"
 
-6 - Success!  You should see a list of 30 repos at /users/show
-
-
--------------------------------------------------------
-
-TESTACULAR
-
-* npm -g testacular 
-
-* cd to spec/javascripts
-
-* execute: 'testacular start' (your tests will execute based on what you configure
-inside of spec/javascripts/testacular.conf.js)
-
--------------------------------------------------------
-
-TESTING TERMINOLOGY
-
-* testacular is a "test runner", jasmine is a testing framework, phantomjs is a headless browser (webkit specifically)
+6 - Success!  You should see a list of your repos at /users/show
